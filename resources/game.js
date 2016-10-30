@@ -8,8 +8,16 @@ var Hangman = (function() {
         self.GameOver = false; 
         self.TurnsLeft = 9;    
         self.Alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');                
-        ResetGame();            
+        ResetGame();     
+        document.addEventListener("keydown", keyDownHandler);
     }
+
+    function keyDownHandler(e) {
+        var pressedKey = e.key.toLowerCase();
+        if (!self.GameOver && pressedKey.match(/[a-z]/i)) {
+            TakeTurn(pressedKey, document.getElementById("Key_" + pressedKey));
+        }
+    }   
 
     //  Function that resets the game to start again
     function ResetGame () {
